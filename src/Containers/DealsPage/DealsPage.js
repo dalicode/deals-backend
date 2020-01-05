@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import Aux from "../../hoc/Aux/aux";
 import Deals from "../../Components/Deals/Deals";
 import axios from "axios";
 import Background from "../../UI/Background/Background";
+import Searchbar from "../../Components/Searchbar/Searchbar";
+import classes from "./DealsPage.module.css";
 
 class DealsPage extends Component {
   state = {
@@ -31,12 +32,12 @@ class DealsPage extends Component {
 
   render() {
     return (
-      <Aux>
-      <Background/>
-        <div>Search bar </div>
+      <div className={classes.Dealspage}>
+        <Background/>
+        <Searchbar/>
         <Deals items={this.state.deals} clicked={this.openExternalUrl}/>
         <div>Navigation controls</div>
-      </Aux>
+      </div>
     );
   }
 }
