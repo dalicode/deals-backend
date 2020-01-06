@@ -1,0 +1,20 @@
+.Deal {
+    padding: 1px 24px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    width: 40%;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    position: relative;
+    z-index: 100;
+    background-color: white;
+    border-radius: 2px;
+    background-color: #eef4ed;
+}
+
+.Deal:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.7);
+    position: relative;
+    z-index: 101;
+    cursor: pointer;
+  }
