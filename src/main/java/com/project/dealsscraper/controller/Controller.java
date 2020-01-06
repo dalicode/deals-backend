@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.project.dealsscraper.services.RedFlagScraper;
 import com.project.dealsscraper.services.RedditApi;
 
-@CrossOrigin
 @RestController
 public class Controller {
 	
@@ -20,19 +19,19 @@ public class Controller {
 	@Autowired
 	RedFlagScraper redFlag;
 	
-	@RequestMapping("/gamedeals")
+	@RequestMapping("/api/gamedeals")
 	public JsonNode gameDeals() {
 		JsonNode games = redditApi.getGameDeals();
 		return games;
 	}
 	
-	@RequestMapping("/bapcsales")
+	@RequestMapping("/api/bapcsales")
 	public JsonNode bapcSales() {
 		JsonNode bapc = redditApi.getBapcSales();
 		return bapc;
 	}
 	
-	@RequestMapping("/redflagdeals")
+	@RequestMapping("/api/redflagdeals")
 	public JsonNode rfd(@RequestParam(value="url",defaultValue="default") String url) {
 		JsonNode redFlagDeals = null;
 		if (url.equals("default")) {
