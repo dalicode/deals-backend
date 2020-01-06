@@ -8,7 +8,8 @@ import classes from "./DealsPage.module.css";
 
 class DealsPage extends Component {
   state = {
-    deals: []
+    deals: [],
+    search: ""
   };
 
   componentDidMount() {
@@ -30,12 +31,16 @@ class DealsPage extends Component {
     window.open(url);
   }
 
+  handleChange = (ev) => {
+    this.setState({search:ev.target.value});
+  }
+
   render() {
     return (
       <div className={classes.Dealspage}>
         <Background/>
-        <Searchbar/>
-        <Deals items={this.state.deals} clicked={this.openExternalUrl}/>
+        <Searchbar changed={this.handleChange}/>
+        <Deals items={this.state.deals} search={this.state.search} clicked={this.openExternalUrl}/>
         <div>Navigation controls</div>
       </div>
     );

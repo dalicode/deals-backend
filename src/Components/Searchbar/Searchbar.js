@@ -3,7 +3,7 @@ import classes from './Searchbar.module.css';
 
 const searchbar = (props) => (
   
-      <input className={classes.Searchbar} type="text" name="" placeholder="Search"/>
+      <input onChange={props.changed} className={classes.Searchbar} type="text" placeholder="Search"/>
 
 );
 

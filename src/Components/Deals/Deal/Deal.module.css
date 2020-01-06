@@ -1,9 +1,10 @@
 .Deal {
-    margin-top: 10px;
     padding: 1px 24px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
-    width: 60%;
-    display: inline-block;
+    width: 40%;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
     position: relative;
     z-index: 100;
     background-color: white;
