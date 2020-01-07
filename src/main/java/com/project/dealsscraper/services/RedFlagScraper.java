@@ -22,7 +22,7 @@ import com.project.dealsscraper.utils.UnixTimeConverter;
 public class RedFlagScraper {
 	private final String BASE_URL = "https://forums.redflagdeals.com";
 	private ObjectMapper mapper = new ObjectMapper();
-
+	private int page = 1;
 	
 	/**
 	 * @return
@@ -35,7 +35,7 @@ public class RedFlagScraper {
 		ArrayNode array = newNode.putArray("deals");
 
 		try {
-			Document doc = Jsoup.connect(BASE_URL + "/hot-deals-f9/").get();
+			Document doc = Jsoup.connect(BASE_URL + "/hot-deals-f9/" + page).get();
 			Elements newsHeadlines = doc.select(".topictitle");
 
 			for (Element headline : newsHeadlines) {
@@ -55,6 +55,7 @@ public class RedFlagScraper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		page++;
 		return newNode;
 	}
 

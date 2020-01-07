@@ -26,7 +26,8 @@ public class RedditApi {
 	private ObjectMapper mapper = new ObjectMapper();
 	private String authToken;
 	private String httpResponse;
-	
+	private String gameDealsNext = "";
+	private String bapcSalesNext = "";
 	/**
 	 * Retrieves authentication token from reddit api
 	 */
@@ -70,9 +71,12 @@ public class RedditApi {
 	 * In this specific case it keeps the title, url, and the utc of threads
 	 */
 	private JsonNode trimRedditJson(JsonNode jn) {
-		JsonNode games = jn.get("data").get("children");
+		JsonNode games = jn.get("data");
+		JsonNode after = games.get("after");
+		games = games.get("children");
 		ObjectNode newNode = mapper.createObjectNode();
         ArrayNode array = newNode.putArray("deals");
+        newNode.set("after", after);
         
 		for (JsonNode personNode : games) {
 		    if (personNode instanceof ObjectNode) {
@@ -94,7 +98,8 @@ public class RedditApi {
 	 * Returns a clean json object of the videogame deals subreddit
 	 */
 	public JsonNode getGameDeals() {
-		JsonNode games = trimRedditJson(getSubreddit("/r/videogamedealscanada/new"));
+		JsonNode games = trimRedditJson(getSubreddit("/r/videogamedealscanada/hot?count=25&after=" + gameDealsNext));
+		gameDealsNext = games.get("after").asText();
 		return games;
 	}
 	
@@ -103,7 +108,8 @@ public class RedditApi {
 	 * Returns a clean json object of the bapcsalescanada subreddit
 	 */
 	public JsonNode getBapcSales() {
-		JsonNode bapc = trimRedditJson(getSubreddit("/r/bapcsalescanada/new"));
+		JsonNode bapc = trimRedditJson(getSubreddit("/r/bapcsalescanada/hot?count=25&after=" + bapcSalesNext));
+		bapcSalesNext = bapc.get("after").asText();
 		return bapc;
 	}
 }
